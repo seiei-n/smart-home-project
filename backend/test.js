@@ -1,13 +1,24 @@
 const Switchbot = require('node-switchbot');
 const switchbot = new Switchbot();
 switchbot
-  .discover({ model: "H", quick: true })
+  .discover({id: process.env.SWITCHBOT_ID})
   .then((device_list) => {
-    return device_list[0].turnOff();
-  })
-  .then(() => {
-    console.log("Done.");
-  })
-  .catch((error) => {
-    console.error(error);
-  });
+    device = device_list[0];
+    console.log(device);
+    return device.connect(); 
+  }).then(() => {
+    return device.turnOff();
+  }
+  ).then(() => {
+    return device.disconnect();
+  }
+  ).then(() => {
+    process.exit(0);
+  }
+  ).catch((err) => {
+    console.log(err);
+    process.exit(1);
+  }
+  );
+
+  
