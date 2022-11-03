@@ -2,8 +2,17 @@
   "dependencies": {
     "@abandonware/noble": "^1.9.2-15",
     "node-switchbot": "^1.4.0"
-  }
-
-  
+  },
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module"
 
 }

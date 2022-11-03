@@ -1,9 +1,8 @@
-export const Switchbot = require('node-switchbot');
+
+import { Switchbot } from './node_modules/switchbot/lib/switchbot';
 export const switchbot = new Switchbot();
-
-
-
 export const turnOn =  function () {
+
   switchbot
   .discover({id: process.env.SWITCHBOT_ID})
   .then((device_list) => {
@@ -19,11 +18,7 @@ export const turnOn =  function () {
   ).then(() => {
     process.exit(0);
   }
-  ).catch((err) => {
-    console.log(err);
-    process.exit(1);
-  }
-  );
+  )
 }
 
 export const turnOff = function () {
@@ -42,9 +37,6 @@ export const turnOff = function () {
   ).then(() => {
     process.exit(0);
   }
-  ).catch((err) => {
-    console.log(err);
-    process.exit(1);
-  }
+
   );
 }
