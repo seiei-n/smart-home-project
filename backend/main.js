@@ -1,5 +1,5 @@
-import { turnOn } from './Operation';
-import { turnOff } from './Operation';
+import { turnOn } from './operation.mjs';
+import { turnOff } from './operation.mjs';
 const http = require('http');
 const port = process.env.PORT;
 
