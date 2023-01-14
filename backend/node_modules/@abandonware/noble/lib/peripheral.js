@@ -1,7 +1,7 @@
 const events = require('events');
 const util = require('util');
 
-function Peripheral (noble, id, address, addressType, connectable, advertisement, rssi) {
+function Peripheral (noble, id, address, addressType, connectable, advertisement, rssi, scannable) {
   this._noble = noble;
 
   this.id = id;
@@ -9,6 +9,7 @@ function Peripheral (noble, id, address, addressType, connectable, advertisement
   this.address = address;
   this.addressType = addressType;
   this.connectable = connectable;
+  this.scannable = scannable;
   this.advertisement = advertisement;
   this.rssi = rssi;
   this.services = null;

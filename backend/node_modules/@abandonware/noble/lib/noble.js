@@ -181,11 +181,11 @@ Noble.prototype.reset = function () {
   this._bindings.reset();
 };
 
-Noble.prototype.onDiscover = function (uuid, address, addressType, connectable, advertisement, rssi) {
+Noble.prototype.onDiscover = function (uuid, address, addressType, connectable, advertisement, rssi, scannable) {
   let peripheral = this._peripherals[uuid];
 
   if (!peripheral) {
-    peripheral = new Peripheral(this, uuid, address, addressType, connectable, advertisement, rssi);
+    peripheral = new Peripheral(this, uuid, address, addressType, connectable, advertisement, rssi, scannable);
 
     this._peripherals[uuid] = peripheral;
     this._services[uuid] = {};
@@ -200,6 +200,7 @@ Noble.prototype.onDiscover = function (uuid, address, addressType, connectable, 
     }
 
     peripheral.connectable = connectable;
+    peripheral.scannable = scannable;
     peripheral.rssi = rssi;
   }
 
@@ -209,7 +210,7 @@ Noble.prototype.onDiscover = function (uuid, address, addressType, connectable, 
     this._discoveredPeripheralUUids.push(uuid);
   }
 
-  if (this._allowDuplicates || !previouslyDiscoverd) {
+  if (this._allowDuplicates || !previouslyDiscoverd || (!scannable && !connectable)) {
     this.emit('discover', peripheral);
   }
 };
@@ -237,12 +238,12 @@ Noble.prototype.disconnect = function (peripheralUuid) {
   this._bindings.disconnect(peripheralUuid);
 };
 
-Noble.prototype.onDisconnect = function (peripheralUuid) {
+Noble.prototype.onDisconnect = function (peripheralUuid, reason) {
   const peripheral = this._peripherals[peripheralUuid];
 
   if (peripheral) {
     peripheral.state = 'disconnected';
-    peripheral.emit('disconnect');
+    peripheral.emit('disconnect', reason);
   } else {
     this.emit('warning', `unknown peripheral ${peripheralUuid} disconnected!`);
   }

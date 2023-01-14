@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@abandonware/noble": "^1.9.2-15",
+    "@abandonware/noble": "^1.9.2-19",
     "node-switchbot": "^1.4.0"
   },
   "name": "backend",
@@ -12,7 +12,7 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
-  "type": "module"
-
+  "type": "module",
+  "keywords": [],
+  "description": ""
 }
